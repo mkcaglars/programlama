@@ -28,7 +28,9 @@ export function PredictTask({ task, onMistake, onSolved, solved }: TaskProps<P>)
     <div className="task-wrap">
       <div className="panel prompt">
         <div className="kind chip">🔮 Çıktıyı Tahmin Et</div>
-        <div>{inline(task.prompt)}</div>
+        {task.prompt.split('\n').map((l, i) => (
+          <div key={i}>{inline(l)}</div>
+        ))}
       </div>
       <CodeView code={task.code} />
       <div className="panel task-area">

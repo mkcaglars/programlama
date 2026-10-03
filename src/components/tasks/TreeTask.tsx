@@ -41,7 +41,9 @@ export function TreeTask({ task, onMistake, onSolved, solved }: TaskProps<T>) {
     <div className="task-wrap">
       <div className="panel prompt">
         <div className="kind chip">🌳 Kalıtım Ağacı</div>
-        <div>{inline(task.prompt)}</div>
+        {task.prompt.split('\n').map((l, i) => (
+          <div key={i}>{inline(l)}</div>
+        ))}
       </div>
       <div className="tree-grid">
         <div>

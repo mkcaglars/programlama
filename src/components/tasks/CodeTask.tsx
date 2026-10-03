@@ -78,7 +78,9 @@ export function CodeTask({ task, onMistake, onSolved, solved, levelId, onSolutio
     <div className="task-wrap">
       <div className="panel prompt">
         <div className="kind chip">💻 Kod Yaz</div>
-        <div>{inline(task.prompt)}</div>
+        {task.prompt.split('\n').map((l, i) => (
+          <div key={i}>{inline(l)}</div>
+        ))}
       </div>
       <div className="ide">
         <div>

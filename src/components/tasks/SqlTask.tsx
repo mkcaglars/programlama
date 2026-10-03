@@ -89,7 +89,9 @@ export function SqlTask({ task, onMistake, onSolved, solved }: TaskProps<S>) {
     <div className="task-wrap">
       <div className="panel prompt">
         <div className="kind chip">🗄️ SQL Sorgusu</div>
-        <div>{inline(task.prompt)}</div>
+        {task.prompt.split('\n').map((l, i) => (
+          <div key={i}>{inline(l)}</div>
+        ))}
       </div>
       <div className="sql-grid">
         <div>

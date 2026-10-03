@@ -18,7 +18,7 @@ Yazdığı C# kodu, tarayıcıda çalışan **kurallı denetleyici** tarafından
 | 6 | Kalıtım: `protected`, `base`, `virtual`/`override`, `sealed` | 3.5 | 8 |
 | 7 | Soyut sınıflar, arayüzler, çok biçimlilik | 3.6 | 6 |
 | 8 | Diziler ve `List<T>` | 4 | 6 |
-| 9 | Form uygulamaları: olaylar, veri bağlama | 5 | 7 |
+| 9 | Form uygulamaları: kontroller, menüler, iletişim kutuları, doğrulama, veri bağlama | 5 | 15 |
 | 10 | Veri tabanı: SQL, JOIN, ADO.NET, Entity Framework | 6 | 15 |
 
 Her bölüm bir **bölüm sonu görevi** ile biter.

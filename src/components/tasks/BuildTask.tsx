@@ -46,7 +46,9 @@ export function BuildTask({ task, onMistake, onSolved, solved }: TaskProps<B>) {
     <div className="task-wrap">
       <div className="panel prompt">
         <div className="kind chip">🧱 Sınıf İnşa Et</div>
-        <div>{inline(task.prompt)}</div>
+        {task.prompt.split('\n').map((l, i) => (
+          <div key={i}>{inline(l)}</div>
+        ))}
         <div className="muted" style={{ fontSize: '0.9rem', marginTop: 4 }}>Bloklara tıklayarak sınıfa ekle veya çıkar.</div>
       </div>
       <div className="build">

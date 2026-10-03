@@ -24,7 +24,9 @@ export function QuizTask({ task, onMistake, onSolved, solved }: TaskProps<Q>) {
     <div className="task-wrap">
       <div className="panel prompt">
         <div className="kind chip">❓ Soru</div>
-        <div>{inline(task.question)}</div>
+        {task.question.split('\n').map((q, i) => (
+          <div key={i}>{inline(q)}</div>
+        ))}
       </div>
       {task.code && <CodeView code={task.code} />}
       <div className="options" role="list">
