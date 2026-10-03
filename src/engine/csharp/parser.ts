@@ -178,7 +178,13 @@ class Parser {
     this.tokens = tokens
   }
 
+  /** Geçerli token (metot olarak: TS daraltması pos değişince yanılmasın) */
   get tok(): Token | undefined {
+    return this.tokens[this.pos]
+  }
+
+  /** Daraltmadan etkilenmeyen okuma (pos değiştikten sonra) */
+  peek(): Token | undefined {
     return this.tokens[this.pos]
   }
 
@@ -370,7 +376,7 @@ class Parser {
         }
         decl.bases.push(r.text)
         this.pos = r.end
-        if (this.tok?.value === ',') {
+        if (this.peek()?.value === ',') {
           this.pos++
           continue
         }
@@ -378,7 +384,7 @@ class Parser {
       }
     }
     while (this.tok?.value === 'where') {
-      while (this.tok && this.tok.value !== '{') this.pos++
+      while (this.peek() && this.peek()!.value !== '{') this.pos++
     }
     this.types.push(decl)
     if (this.tok?.value === ';') {
@@ -505,7 +511,7 @@ class Parser {
       const nameTok = this.tok
       this.pos++
       if (nameTok?.value !== decl.name) this.err(line, 'CS0574', `Yıkıcı metodun adı sınıf adıyla aynı olmalıdır: ~${decl.name}()`)
-      if (this.tok?.value !== '(') {
+      if (this.peek()?.value !== '(') {
         this.err(line, 'CS1026', "Yıkıcı metot adından sonra '(' bekleniyor.")
         this.recover(true)
         return
@@ -522,7 +528,7 @@ class Parser {
       let initializer: CtorMember['initializer'] = null
       if (this.tok?.value === ':') {
         this.pos++
-        const k = this.tok?.value
+        const k = this.peek()?.value
         if ((k === 'base' || k === 'this') && this.tokens[this.pos + 1]?.value === '(') {
           this.pos++
           const c = matchClose(this.tokens, this.pos)
@@ -601,8 +607,8 @@ class Parser {
       if (this.tok?.value === '=') {
         this.pos++
         const start = this.pos
-        while (this.tok && this.tok.value !== ';' && this.tok.value !== ',' && this.pos < end) {
-          if (this.tok.value === '(' || this.tok.value === '[' || this.tok.value === '{') {
+        while (this.peek() && this.peek()!.value !== ';' && this.peek()!.value !== ',' && this.pos < end) {
+          if (this.peek()!.value === '(' || this.peek()!.value === '[' || this.peek()!.value === '{') {
             const c = matchClose(this.tokens, this.pos)
             this.pos = c < 0 ? end : c + 1
             continue
@@ -688,7 +694,7 @@ class Parser {
     }
     this.pos = end + 1
     if (this.tok?.value === '=') {
-      while (this.tok && this.tok.value !== ';') this.pos++
+      while (this.peek() && this.peek()!.value !== ';') this.pos++
       this.pos++
     }
     decl.members.push({ kind: 'property', name, modifiers: mods, access, line, isStatic, type, get, set, auto: auto && decl.kind !== 'interface' ? true : auto })

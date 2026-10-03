@@ -47,6 +47,7 @@ function bodyText(src: string, tokens: Token[] | null | undefined): string {
 
 function memberBody(src: string, m: Member): string {
   if (m.kind === 'property') return bodyText(src, m.get?.body) + '\n' + bodyText(src, m.set?.body)
+  if (m.kind === 'field') return m.init ?? ''
   return bodyText(src, m.body)
 }
 
