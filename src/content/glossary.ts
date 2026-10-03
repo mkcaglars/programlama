@@ -1,0 +1,58 @@
+export interface Term {
+  term: string
+  en: string
+  desc: string
+  code?: string
+  chapter: string
+}
+
+export const GLOSSARY: Term[] = [
+  { term: 'Değişken', en: 'Variable', chapter: 'temeller', desc: 'Verileri bellekte saklamak için kullanılan isimlendirilmiş alan. Her değişkenin bir veri türü vardır.', code: 'int yas = 16;' },
+  { term: 'Veri türü', en: 'Data type', chapter: 'temeller', desc: 'Bir değişkenin hangi tür veriyi tutabileceğini belirler: int, double, string, char, bool…' },
+  { term: 'Tür dönüşümü', en: 'Type conversion', chapter: 'temeller', desc: 'Bir veriyi başka bir türe çevirme. Metin → sayı: Convert.ToInt32(), sayı → metin: ToString().', code: 'int x = Convert.ToInt32(textBox1.Text);' },
+  { term: 'Sınıf', en: 'Class', chapter: 'sinif-nesne', desc: 'Nesnelerin özelliklerini ve davranışlarını tanımlayan kalıp / plan.', code: 'class Televizyon { }' },
+  { term: 'Nesne', en: 'Object / Instance', chapter: 'sinif-nesne', desc: 'Bir sınıftan new ile oluşturulan somut örnek.', code: 'Televizyon tv = new Televizyon();' },
+  { term: 'Alan', en: 'Field', chapter: 'sinif-nesne', desc: 'Sınıf içinde tanımlanan ve nesnenin verisini tutan değişken.', code: 'private int kanalNo;' },
+  { term: 'Metot', en: 'Method', chapter: 'metotlar', desc: 'Nesnenin davranışını tanımlayan, çağrıldığında çalışan kod bloğu.', code: 'public void GucAc() { }' },
+  { term: 'new', en: 'new operator', chapter: 'sinif-nesne', desc: 'Bellekte yeni bir nesne oluşturur ve yapıcı metodu çalıştırır.' },
+  { term: 'Referans türü', en: 'Reference type', chapter: 'sinif-nesne', desc: 'Değişkenin nesnenin kendisini değil bellekteki adresini tuttuğu tür. Sınıflar referans türüdür.' },
+  { term: 'Kapsülleme', en: 'Encapsulation', chapter: 'kapsulleme', desc: 'Nesnenin verilerini private yaparak gizleme ve yalnızca kontrollü yollarla (özellik, metot) erişim sağlama.' },
+  { term: 'Erişim belirleyici', en: 'Access modifier', chapter: 'kapsulleme', desc: 'Üyelere nereden erişilebileceğini belirler: public, private, protected, internal.' },
+  { term: 'public', en: 'public', chapter: 'kapsulleme', desc: 'Üyeye her yerden erişilebilir.' },
+  { term: 'private', en: 'private', chapter: 'kapsulleme', desc: 'Üyeye yalnızca tanımlandığı sınıfın içinden erişilebilir. Sınıf üyelerinde varsayılan erişimdir.' },
+  { term: 'protected', en: 'protected', chapter: 'kalitim', desc: 'Üyeye sınıfın kendisi ve alt sınıfları erişebilir.' },
+  { term: 'Özellik', en: 'Property', chapter: 'kapsulleme', desc: 'get ve set erişimcileriyle bir alana kontrollü erişim sağlayan sınıf üyesi.', code: 'public int Ses { get { return ses; } set { ses = value; } }' },
+  { term: 'value', en: 'value keyword', chapter: 'kapsulleme', desc: 'set bloğu içinde, özelliğe atanmak istenen değeri temsil eder.' },
+  { term: 'Otomatik özellik', en: 'Auto-property', chapter: 'kapsulleme', desc: 'Gizli alanı derleyicinin oluşturduğu kısa özellik yazımı.', code: 'public string Marka { get; set; }' },
+  { term: 'Dönüş türü', en: 'Return type', chapter: 'metotlar', desc: 'Metodun geriye döndürdüğü değerin türü. Değer döndürmüyorsa void yazılır.' },
+  { term: 'Parametre', en: 'Parameter', chapter: 'metotlar', desc: 'Metoda dışarıdan gönderilen değerleri karşılayan değişkenler.' },
+  { term: 'Aşırı yükleme', en: 'Overloading', chapter: 'metotlar', desc: 'Aynı isimde, farklı parametre listelerine sahip birden çok metot tanımlama.' },
+  { term: 'this', en: 'this keyword', chapter: 'metotlar', desc: 'Metodun çalıştığı nesnenin kendisini ifade eder. Alan ve parametre adları aynıysa ayırt etmek için kullanılır.', code: 'this.kanalNo = kanalNo;' },
+  { term: 'Yapıcı metot', en: 'Constructor', chapter: 'yapici-static', desc: 'Nesne oluşturulurken otomatik çalışan, sınıfla aynı adı taşıyan, dönüş türü olmayan metot.', code: 'public Ogrenci(string ad) { this.ad = ad; }' },
+  { term: 'Yıkıcı metot', en: 'Destructor / Finalizer', chapter: 'yapici-static', desc: 'Nesne bellekten silinirken çalışan, adı ~ ile başlayan metot. Parametre almaz, aşırı yüklenemez.', code: '~Ogrenci() { }' },
+  { term: 'Çöp toplayıcı', en: 'Garbage Collector', chapter: 'yapici-static', desc: 'Artık kullanılmayan nesneleri bellekten otomatik olarak temizleyen .NET mekanizması.' },
+  { term: 'static', en: 'static', chapter: 'yapici-static', desc: 'Nesneye değil sınıfa ait üye. Tek kopyası vardır ve sınıf adıyla erişilir.', code: 'Math.PI, Console.WriteLine()' },
+  { term: 'Kalıtım', en: 'Inheritance', chapter: 'kalitim', desc: 'Bir sınıfın başka bir sınıfın üyelerini devralması.', code: 'class AkilliTelevizyon : Televizyon { }' },
+  { term: 'Temel sınıf', en: 'Base class', chapter: 'kalitim', desc: 'Üyeleri devredilen üst sınıf.' },
+  { term: 'Alt sınıf', en: 'Derived class', chapter: 'kalitim', desc: 'Başka bir sınıftan türetilmiş sınıf.' },
+  { term: 'base', en: 'base keyword', chapter: 'kalitim', desc: 'Temel sınıfa erişmek veya temel sınıfın yapıcısını çağırmak için kullanılır.', code: ': base(marka)' },
+  { term: 'virtual', en: 'virtual', chapter: 'kalitim', desc: 'Alt sınıflarda geçersiz kılınabilecek (override edilebilecek) metodu işaretler.' },
+  { term: 'override', en: 'override', chapter: 'kalitim', desc: 'Temel sınıftaki virtual veya abstract bir metodu alt sınıfta yeniden tanımlar.' },
+  { term: 'sealed', en: 'sealed', chapter: 'kalitim', desc: 'Mühürlü sınıf; ondan başka sınıf türetilemez.' },
+  { term: 'Çok biçimlilik', en: 'Polymorphism', chapter: 'kalitim', desc: 'Temel sınıf türündeki bir değişken üzerinden çağrılan metodun, nesnenin gerçek türüne göre farklı davranması.' },
+  { term: 'Soyut sınıf', en: 'Abstract class', chapter: 'soyut-arayuz', desc: 'Nesne oluşturulamayan, alt sınıflara temel olan, soyut metotlar içerebilen sınıf.' },
+  { term: 'Soyut metot', en: 'Abstract method', chapter: 'soyut-arayuz', desc: 'Gövdesi olmayan ve alt sınıflarda override edilmesi zorunlu olan metot.', code: 'public abstract void GucAc();' },
+  { term: 'Arayüz', en: 'Interface', chapter: 'soyut-arayuz', desc: 'Bir sınıfın uygulaması gereken üyeleri tanımlayan sözleşme. Bir sınıf birden çok arayüz uygulayabilir.', code: 'interface IGuc { void GucAc(); }' },
+  { term: 'Dizi', en: 'Array', chapter: 'koleksiyonlar', desc: 'Aynı türden sabit sayıda elemanı tutan yapı. İndisler 0\'dan başlar.', code: 'int[] notlar = new int[5];' },
+  { term: 'List<T>', en: 'Generic List', chapter: 'koleksiyonlar', desc: 'Eleman eklendikçe büyüyen, tür güvenli koleksiyon.', code: 'List<string> l = new List<string>();' },
+  { term: 'foreach', en: 'foreach loop', chapter: 'koleksiyonlar', desc: 'Bir dizi veya koleksiyonun tüm elemanları üzerinde sırayla gezinen döngü.' },
+  { term: 'Olay', en: 'Event', chapter: 'formlar', desc: 'Kullanıcı etkileşimi veya sistem durumu sonucunda tetiklenen ve bir metodu çalıştıran mekanizma (Click, Load…).' },
+  { term: 'Veri bağlama', en: 'Data binding', chapter: 'formlar', desc: 'Bir veri kaynağını (List, DataTable) bir kontrole (DataGridView) bağlayarak gösterme. DataSource özelliği kullanılır.' },
+  { term: 'Veri tabanı', en: 'Database', chapter: 'veritabani', desc: 'Verileri sistemli ve kalıcı olarak saklayan, tablolardan oluşan yapı.' },
+  { term: 'SQL', en: 'Structured Query Language', chapter: 'veritabani', desc: 'Veri tabanı ile iletişim kurmak için kullanılan yapılandırılmış sorgu dili.', code: 'SELECT * FROM kitaplar;' },
+  { term: 'Birincil anahtar', en: 'Primary key', chapter: 'veritabani', desc: 'Tablodaki her kaydı benzersiz olarak tanımlayan alan.' },
+  { term: 'Normalizasyon', en: 'Normalization', chapter: 'veritabani', desc: 'Tabloları tekrarlardan arındırmak için daha küçük, ilişkili tablolara ayırma işlemi.' },
+  { term: 'CRUD', en: 'Create, Read, Update, Delete', chapter: 'veritabani', desc: 'Temel veri işlemleri: ekleme (INSERT), okuma (SELECT), güncelleme (UPDATE), silme (DELETE).' },
+  { term: 'ORM', en: 'Object Relational Mapping', chapter: 'veritabani', desc: 'Sınıfları tablolara, nesneleri satırlara eşleyerek SQL yazmadan veri tabanı işlemi yapmayı sağlayan teknik.' },
+  { term: 'Entity Framework', en: 'Entity Framework', chapter: 'veritabani', desc: '.NET için ORM aracı. Database First, Model First ve Code First yaklaşımlarını destekler.' },
+]
