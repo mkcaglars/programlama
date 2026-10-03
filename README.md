@@ -52,6 +52,15 @@ npm run build      # dist/ klasörüne statik derleme
 `dist/` klasörü göreli yollarla derlenir. Bu yüzden GitHub Pages, okul sunucusu veya herhangi bir statik barındırıcıda doğrudan çalışır.
 Sunucu tarafı yoktur.
 
+### GitHub Pages ile yayın
+
+`.github/workflows/pages.yml`, `main` veya `claude/brave-ritchie-uqw4rp` dalına her push'ta testleri çalıştırır, siteyi derler ve GitHub Pages'e yükler.
+Testlerden biri başarısız olursa yayın yapılmaz.
+
+Bir kerelik ayar: depoda **Settings → Pages → Build and deployment → Source** alanını **GitHub Actions** yapın.
+Ardından **Actions → GitHub Pages → Run workflow** ile ilk yayını başlatın.
+Site `https://<kullanıcı-adı>.github.io/programlama/` adresinde yayınlanır.
+
 ## Mimari
 
 ```
