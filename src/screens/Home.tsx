@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { ALL_LEVELS, CHAPTERS } from '../content'
 import { earnedBadges } from '../content/badges'
-import { progress, rankOf, totalXp, useProgress } from '../engine/progress'
+import { progress, rankOf, totalXp, URL_NAME, useProgress } from '../engine/progress'
 import { nextLevelId } from '../engine/unlock'
 import { go } from '../router'
 import { CodeView } from '../components/CodeView'
@@ -18,7 +18,7 @@ export function Home() {
   const stars = Object.values(s.levels).reduce((a, l) => a + l.stars, 0)
 
   const start = () => {
-    if (name.trim()) progress.setName(name.trim())
+    if (!URL_NAME && name.trim()) progress.setName(name.trim())
     go(next ? `/seviye/${next}` : '/harita')
   }
 
@@ -46,14 +46,20 @@ export function Home() {
           </div>
         </div>
         <div className="panel hero-card">
-          <h2>{s.name ? `Tekrar hoş geldin, ${s.name}!` : 'Atölyeye giriş kartı'}</h2>
+          <h2>{s.name ? (done > 0 ? `Tekrar hoş geldin, ${s.name}!` : `Hoş geldin, ${s.name}!`) : 'Atölyeye giriş kartı'}</h2>
           <p className="muted" style={{ margin: 0 }}>
             {rank.icon} Unvanın: <b>{rank.title}</b> · {xp} XP
           </p>
-          <label htmlFor="ad" style={{ display: 'block', marginTop: 14, fontWeight: 800 }}>
-            Mühendis adın
-          </label>
-          <input id="ad" value={name} onChange={(e) => setName(e.target.value)} placeholder="Adını yaz" maxLength={30} onKeyDown={(e) => e.key === 'Enter' && start()} />
+          {URL_NAME ? (
+            <div style={{ height: 14 }} />
+          ) : (
+            <>
+              <label htmlFor="ad" style={{ display: 'block', marginTop: 14, fontWeight: 800 }}>
+                Mühendis adın
+              </label>
+              <input id="ad" value={name} onChange={(e) => setName(e.target.value)} placeholder="Adını yaz" maxLength={40} onKeyDown={(e) => e.key === 'Enter' && start()} />
+            </>
+          )}
           <button className="btn primary" style={{ width: '100%' }} onClick={start}>
             {done === 0 ? '🚀 Maceraya Başla' : next ? '▶ Kaldığın Yerden Devam Et' : '🗺️ Haritaya Git'}
           </button>

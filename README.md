@@ -37,7 +37,11 @@ Her bölüm bir **bölüm sonu görevi** ile biter.
 - **SQL Sorgusu**: tarayıcıda çalışan bellek içi MySQL benzeri motor
 
 Oyunlaştırma öğeleri: yıldızlar (hata ve ipucu sayısına göre), XP, unvanlar (Çırak → Baş Mühendis), rozetler ve sıralı açılan seviyeler.
-Öğretmen modunda tüm seviyelerin kilidi açılır. İlerleme tarayıcıda saklanır; JSON olarak dışa aktarılabilir veya içe aktarılabilir.
+Öğretmen modunda tüm seviyelerin kilidi açılır.
+
+**Öğrenciye özel bağlantı:** Adresin sonuna `?isim=` eklenirse isim sorulmaz ve otomatik kullanılır.
+Örnek: `https://mkcaglars.github.io/programlama/?isim=Mustafa%20Kemal%20Çağlar`.
+Her isim için ilerleme ayrı saklanır. Böylece aynı bilgisayarı kullanan öğrenciler birbirinin ilerlemesini görmez. İlerleme tarayıcıda saklanır; JSON olarak dışa aktarılabilir veya içe aktarılabilir.
 
 ## Geliştirme
 

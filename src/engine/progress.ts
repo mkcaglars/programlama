@@ -14,17 +14,37 @@ export interface ProgressState {
   sound: boolean
 }
 
-const KEY = 'nesne-atolyesi:v1'
+/** Adres satırındaki ?isim=... değeri (ör. ?isim=Mustafa%20Kemal). Yoksa null. */
+export function nameFromUrl(search: string): string | null {
+  let raw: string | null = null
+  try {
+    raw = new URLSearchParams(search).get('isim')
+  } catch {
+    return null
+  }
+  const name = (raw ?? '').replace(/\s+/g, ' ').trim().slice(0, 40)
+  return name || null
+}
+
+/** İsim URL'den geldiyse her öğrencinin ilerlemesi ayrı anahtarda tutulur (ortak bilgisayarlar için). */
+export function storageKey(urlName: string | null): string {
+  return urlName ? `nesne-atolyesi:v1:${urlName.toLocaleLowerCase('tr')}` : 'nesne-atolyesi:v1'
+}
+
+/** Bu oturumda isim URL'den mi geldi? Geldiyse isim sorulmaz. */
+export const URL_NAME = typeof window === 'undefined' ? null : nameFromUrl(window.location.search)
+const KEY = storageKey(URL_NAME)
 const initial: ProgressState = { name: '', levels: {}, unlockAll: false, sound: true }
 
 function load(): ProgressState {
+  let loaded = initial
   try {
     const raw = localStorage.getItem(KEY)
-    if (raw) return { ...initial, ...(JSON.parse(raw) as Partial<ProgressState>) }
+    if (raw) loaded = { ...initial, ...(JSON.parse(raw) as Partial<ProgressState>) }
   } catch {
     // depolama kullanılamıyor (gizli pencere vb.) — boş ilerlemeyle devam
   }
-  return initial
+  return URL_NAME ? { ...loaded, name: URL_NAME } : loaded
 }
 
 let state: ProgressState = load()
@@ -77,7 +97,7 @@ export const progress = {
   importJson(json: string) {
     const parsed = JSON.parse(json) as Partial<ProgressState>
     if (!parsed || typeof parsed !== 'object' || typeof parsed.levels !== 'object') throw new Error('Geçersiz dosya')
-    set({ ...initial, ...parsed })
+    set({ ...initial, ...parsed, ...(URL_NAME ? { name: URL_NAME } : {}) })
   },
 }
 
